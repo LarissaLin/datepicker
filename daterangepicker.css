@@ -1,0 +1,667 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  font-size: 14px;
+}
+
+div.calendar-container {
+  position: relative;
+}
+div.calendar-container::after {
+  content: url("./calendar.svg");
+  width: 18px;
+  height: 18px;
+  display: block;
+  position: absolute;
+  top: 8px;
+  right: 7px;
+}
+
+.date-range-picker-container {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
+.date-range-picker-container .input-cintainer {
+  display: flex;
+  align-items: center;
+  display: flex;
+}
+.date-range-picker-container .input-cintainer .start-date-time-container,
+.date-range-picker-container .input-cintainer .end-date-time-container {
+  border-radius: 2px;
+  border: 1px solid #e1e1e1;
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 200px;
+  overflow: hidden;
+}
+.date-range-picker-container .input-cintainer .start-date-time-container input,
+.date-range-picker-container .input-cintainer .end-date-time-container input {
+  border: none;
+  padding: 0 8px;
+  width: 100%;
+  height: 100%;
+  color: #3f3f3f;
+  height: 32px;
+  line-height: 32px;
+}
+.date-range-picker-container .input-cintainer .start-date-time-container.input-active,
+.date-range-picker-container .input-cintainer .end-date-time-container.input-active {
+  border: 1px solid #357ebd;
+}
+.date-range-picker-container .input-cintainer span {
+  color: #3f3f3f;
+  display: block;
+  margin: 0 5px;
+}
+.date-range-picker-container .input-cintainer input.input-active {
+  box-shadow: 0 0 0 1px #0067b8;
+}
+.date-range-picker-container .quick-date-picker-container {
+  margin-left: 10px;
+}
+.date-range-picker-container .quick-date-picker-container button {
+  text-decoration: none;
+  padding: 0;
+  margin-right: 5px;
+}
+
+.display-flex {
+  display: flex !important;
+}
+
+.display-block {
+  display: block !important;
+}
+
+.display-none {
+  display: none !important;
+}
+
+span .prev.is-available,
+span .next.is-available {
+  cursor: pointer;
+}
+
+span .prev.is-disbaled,
+span .next.is-disbaled {
+  cursor: not-allowed;
+}
+span .prev.is-disbaled i,
+span .next.is-disbaled i {
+  color: #999;
+}
+
+.month-yeart-select-container {
+  display: flex;
+  height: 50px;
+  line-height: 50px;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 0 16px;
+}
+.month-yeart-select-container .letf-monthselect-container,
+.month-yeart-select-container .letf-yearselect-container,
+.month-yeart-select-container .right-monthselect-container,
+.month-yeart-select-container .right-yearselect-container {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.month-yeart-select-container .letf-monthselect-container .current-month,
+.month-yeart-select-container .letf-monthselect-container .current-year,
+.month-yeart-select-container .letf-yearselect-container .current-month,
+.month-yeart-select-container .letf-yearselect-container .current-year,
+.month-yeart-select-container .right-monthselect-container .current-month,
+.month-yeart-select-container .right-monthselect-container .current-year,
+.month-yeart-select-container .right-yearselect-container .current-month,
+.month-yeart-select-container .right-yearselect-container .current-year {
+  cursor: pointer;
+}
+.month-yeart-select-container .letf-monthselect-container .current-month i,
+.month-yeart-select-container .letf-monthselect-container .current-year i,
+.month-yeart-select-container .letf-yearselect-container .current-month i,
+.month-yeart-select-container .letf-yearselect-container .current-year i,
+.month-yeart-select-container .right-monthselect-container .current-month i,
+.month-yeart-select-container .right-monthselect-container .current-year i,
+.month-yeart-select-container .right-yearselect-container .current-month i,
+.month-yeart-select-container .right-yearselect-container .current-year i {
+  margin-left: 8px;
+}
+.month-yeart-select-container .letf-monthselect-container span.is-available,
+.month-yeart-select-container .letf-yearselect-container span.is-available,
+.month-yeart-select-container .right-monthselect-container span.is-available,
+.month-yeart-select-container .right-yearselect-container span.is-available {
+  cursor: pointer;
+}
+.month-yeart-select-container .letf-monthselect-container span.is-disbaled,
+.month-yeart-select-container .letf-yearselect-container span.is-disbaled,
+.month-yeart-select-container .right-monthselect-container span.is-disbaled,
+.month-yeart-select-container .right-yearselect-container span.is-disbaled {
+  cursor: not-allowed;
+}
+.month-yeart-select-container .letf-monthselect-container span.is-disbaled i,
+.month-yeart-select-container .letf-yearselect-container span.is-disbaled i,
+.month-yeart-select-container .right-monthselect-container span.is-disbaled i,
+.month-yeart-select-container .right-yearselect-container span.is-disbaled i {
+  color: #999;
+}
+.month-yeart-select-container .letf-monthselect-container,
+.month-yeart-select-container .right-monthselect-container {
+  margin-right: 16px;
+}
+.month-yeart-select-container .letf-yearselect-container,
+.month-yeart-select-container .right-yearselect-container {
+  margin-left: 16px;
+}
+.month-yeart-select-container .sub-card-title {
+  display: none;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+.month-yeart-select-container .sub-card-title span.is-available {
+  cursor: pointer;
+}
+.month-yeart-select-container .sub-card-title span.is-disbaled {
+  cursor: not-allowed;
+  color: #999;
+}
+
+.more-hour-minute-container .hour-list-container,
+.more-hour-minute-container .minute-list-container {
+  flex: 1;
+  text-align: center;
+  height: 260px;
+  overflow: auto;
+  transition: transform 2s;
+}
+.more-hour-minute-container .hour-list-container ul,
+.more-hour-minute-container .minute-list-container ul {
+  margin: 110px 0;
+  padding: 0;
+  list-style: none;
+}
+.more-hour-minute-container .hour-list-container ul li,
+.more-hour-minute-container .minute-list-container ul li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 14px;
+  color: #3f3f3f;
+  cursor: pointer;
+}
+.more-hour-minute-container .hour-list-container ul li.selected,
+.more-hour-minute-container .minute-list-container ul li.selected {
+  background-color: rgb(227, 240, 255);
+  font-weight: 600;
+}
+.more-hour-minute-container .hour-list-container ul li:hover,
+.more-hour-minute-container .minute-list-container ul li:hover {
+  background-color: #ebf4f8;
+}
+.more-hour-minute-container .minute-list-container::-webkit-scrollbar,
+.more-hour-minute-container .hour-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.more-hour-minute-container,
+.more-months-container,
+.more-years-container {
+  display: none;
+}
+.more-hour-minute-container .month-list,
+.more-hour-minute-container .year-list,
+.more-months-container .month-list,
+.more-months-container .year-list,
+.more-years-container .month-list,
+.more-years-container .year-list {
+  margin: 16px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.more-hour-minute-container .month-list li,
+.more-hour-minute-container .year-list li,
+.more-months-container .month-list li,
+.more-months-container .year-list li,
+.more-years-container .month-list li,
+.more-years-container .year-list li {
+  width: 48px;
+  font-size: 14px;
+  text-align: center;
+  height: 26px;
+  line-height: 26px;
+  color: #3f3f3f;
+  border-radius: 2px;
+  margin-right: 18px;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+.more-hour-minute-container .month-list li:hover,
+.more-hour-minute-container .year-list li:hover,
+.more-months-container .month-list li:hover,
+.more-months-container .year-list li:hover,
+.more-years-container .month-list li:hover,
+.more-years-container .year-list li:hover {
+  background-color: #ebf4f8;
+}
+.more-hour-minute-container .month-list li:nth-child(4n),
+.more-hour-minute-container .year-list li:nth-child(4n),
+.more-months-container .month-list li:nth-child(4n),
+.more-months-container .year-list li:nth-child(4n),
+.more-years-container .month-list li:nth-child(4n),
+.more-years-container .year-list li:nth-child(4n) {
+  margin-right: 0;
+}
+.more-hour-minute-container .month-list li.month-item-selected,
+.more-hour-minute-container .year-list li.month-item-selected,
+.more-months-container .month-list li.month-item-selected,
+.more-months-container .year-list li.month-item-selected,
+.more-years-container .month-list li.month-item-selected,
+.more-years-container .year-list li.month-item-selected {
+  background: #357ebd;
+  color: #fff;
+}
+.more-hour-minute-container .month-list li.month-item-disabled,
+.more-hour-minute-container .year-list li.month-item-disabled,
+.more-months-container .month-list li.month-item-disabled,
+.more-months-container .year-list li.month-item-disabled,
+.more-years-container .month-list li.month-item-disabled,
+.more-years-container .year-list li.month-item-disabled {
+  cursor: not-allowed;
+  color: #999;
+}
+.more-hour-minute-container .month-list li.month-item-disabled:hover,
+.more-hour-minute-container .year-list li.month-item-disabled:hover,
+.more-months-container .month-list li.month-item-disabled:hover,
+.more-months-container .year-list li.month-item-disabled:hover,
+.more-years-container .month-list li.month-item-disabled:hover,
+.more-years-container .year-list li.month-item-disabled:hover {
+  background: none;
+}
+.more-hour-minute-container .month-list li.year-item-selected,
+.more-hour-minute-container .year-list li.year-item-selected,
+.more-months-container .month-list li.year-item-selected,
+.more-months-container .year-list li.year-item-selected,
+.more-years-container .month-list li.year-item-selected,
+.more-years-container .year-list li.year-item-selected {
+  background: #357ebd;
+  color: #fff;
+}
+.more-hour-minute-container .month-list li.year-item-disabled,
+.more-hour-minute-container .year-list li.year-item-disabled,
+.more-months-container .month-list li.year-item-disabled,
+.more-months-container .year-list li.year-item-disabled,
+.more-years-container .month-list li.year-item-disabled,
+.more-years-container .year-list li.year-item-disabled {
+  cursor: not-allowed;
+  color: #999;
+}
+.more-hour-minute-container .month-list li.year-item-disabled:hover,
+.more-hour-minute-container .year-list li.year-item-disabled:hover,
+.more-months-container .month-list li.year-item-disabled:hover,
+.more-months-container .year-list li.year-item-disabled:hover,
+.more-years-container .month-list li.year-item-disabled:hover,
+.more-years-container .year-list li.year-item-disabled:hover {
+  background: none;
+}
+
+.daterangepicker {
+  position: absolute;
+  color: inherit;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.1);
+  width: 284px;
+  max-width: none;
+  padding: 0;
+  margin-top: 7px;
+  top: 100px;
+  left: 20px;
+  z-index: 3001;
+  display: none;
+  font-family: arial;
+  font-size: 15px;
+  line-height: 1em;
+}
+
+.daterangepicker.opensleft:before {
+  right: 9px;
+}
+
+.daterangepicker.opensleft:after {
+  right: 10px;
+}
+
+.daterangepicker.openscenter:before {
+  left: 0;
+  right: 0;
+  width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.daterangepicker.openscenter:after {
+  left: 0;
+  right: 0;
+  width: 0;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.daterangepicker.opensright:before {
+  left: 9px;
+}
+
+.daterangepicker.opensright:after {
+  left: 10px;
+}
+
+.daterangepicker.drop-up {
+  margin-top: -7px;
+}
+
+.daterangepicker.drop-up:before {
+  top: initial;
+  bottom: -7px;
+  border-bottom: initial;
+  border-top: 7px solid #ccc;
+}
+
+.daterangepicker.drop-up:after {
+  top: initial;
+  bottom: -6px;
+  border-bottom: initial;
+  border-top: 6px solid #fff;
+}
+
+.daterangepicker.single .daterangepicker .ranges,
+.daterangepicker.single .drp-calendar {
+  float: none;
+}
+.daterangepicker.single .drp-selected {
+  display: none;
+}
+
+.daterangepicker.show-calendar .drp-calendar {
+  display: block;
+}
+.daterangepicker.show-calendar .drp-buttons {
+  display: block;
+}
+
+.daterangepicker .drp-calendar {
+  width: 100%;
+  display: none;
+}
+.daterangepicker .drp-calendar.single .calendar-table {
+  border: none;
+}
+.daterangepicker .calendar-table {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.daterangepicker .calendar-table .th,
+.daterangepicker .calendar-table .td {
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  height: 24px;
+  line-height: 24px;
+  font-size: 14px;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  width: 24px;
+  margin-right: 14px;
+  margin-bottom: 10px;
+  color: #3f3f3f;
+  cursor: pointer;
+}
+.daterangepicker .calendar-table .th :last-child,
+.daterangepicker .calendar-table .td :last-child {
+  margin-right: unset;
+}
+.daterangepicker .calendar-table .th:nth-child(7n),
+.daterangepicker .calendar-table .td:nth-child(7n) {
+  margin-right: unset;
+}
+.daterangepicker .calendar-table .table-condensed {
+  width: 100%;
+  table-layout: fixed;
+  margin-top: 10px;
+}
+.daterangepicker .calendar-table .table-condensed .more-data-container .date-row-container {
+  display: flex;
+  justify-content: center;
+}
+.daterangepicker .calendar-table .table-condensed .week-header-container .week-header-content {
+  display: flex;
+  justify-content: center;
+}
+.daterangepicker .calendar-table .table-condensed .week-header-container .week-header-content .th {
+  cursor: not-allowed;
+  font-weight: 600;
+}
+.daterangepicker .td.is-available:hover,
+.daterangepicker .th.is-available:hover {
+  background-color: #ebf4f8;
+  border-color: transparent;
+  color: inherit;
+}
+.daterangepicker td.week,
+.daterangepicker .th.week {
+  font-size: 80%;
+  color: #ccc;
+}
+.daterangepicker .td.off,
+.daterangepicker .td.off.in-range,
+.daterangepicker .td.off.start-date {
+  background-color: #fff;
+  border-color: transparent;
+  color: #999;
+}
+.daterangepicker .td.off.ends {
+  visibility: hidden;
+  height: 0;
+}
+.daterangepicker .td.in-range {
+  background-color: #ebf4f8;
+  border-color: transparent;
+  color: #000;
+  border-radius: 0;
+}
+.daterangepicker .td.start-date {
+  border-radius: 4px;
+}
+.daterangepicker .td.active,
+.daterangepicker .td.active:hover {
+  background-color: #357ebd;
+  border-color: transparent;
+  color: #fff;
+}
+.daterangepicker .th.month {
+  width: auto;
+}
+.daterangepicker .td.disabled,
+.daterangepicker option.disabled {
+  color: #999;
+  cursor: not-allowed;
+  /* text-decoration: line-through; */
+}
+.daterangepicker select.monthselect,
+.daterangepicker select.yearselect {
+  font-size: 12px;
+  padding: 1px;
+  height: auto;
+  margin: 0;
+  cursor: default;
+}
+.daterangepicker select.monthselect {
+  margin-right: 2%;
+  width: 56%;
+}
+.daterangepicker select.yearselect {
+  width: 40%;
+}
+.daterangepicker select.hourselect,
+.daterangepicker select.minuteselect,
+.daterangepicker select.secondselect,
+.daterangepicker select.ampmselect {
+  width: 50px;
+  margin: 0 auto;
+  background: #eee;
+  border: 1px solid #eee;
+  padding: 2px;
+  outline: 0;
+  font-size: 12px;
+}
+.daterangepicker .calendar-time {
+  text-align: center;
+  line-height: 30px;
+  position: relative;
+}
+.daterangepicker .calendar-time select.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+.daterangepicker .drp-buttons {
+  clear: both;
+  text-align: right;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+  line-height: 12px;
+  vertical-align: middle;
+}
+.daterangepicker .drp-buttons * {
+  font-size: 14px;
+}
+.daterangepicker .drp-buttons .btn {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 8px;
+}
+.daterangepicker .drp-buttons .selectDateLink {
+  display: none;
+}
+.daterangepicker .drp-buttons .applyBtn {
+  width: 56px;
+  border-radius: 2px;
+  background-color: #0067B8;
+}
+.daterangepicker .drp-buttons .btn-link {
+  text-decoration: none;
+}
+.daterangepicker .drp-selected {
+  display: inline-block;
+  font-size: 12px;
+  padding-right: 8px;
+}
+
+.daterangepicker.show-ranges.single.rtl .drp-calendar.left {
+  border-right: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.single.ltr .drp-calendar.left {
+  border-left: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.rtl .drp-calendar.right {
+  border-right: 1px solid #ddd;
+}
+
+.daterangepicker.show-ranges.ltr .drp-calendar.left {
+  border-left: 1px solid #ddd;
+}
+
+.daterangepicker .ranges {
+  float: none;
+  text-align: left;
+  margin: 0;
+}
+
+.daterangepicker.show-calendar .ranges {
+  margin-top: 8px;
+}
+
+.daterangepicker .ranges ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.daterangepicker .ranges li {
+  font-size: 12px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.daterangepicker .ranges li:hover {
+  background-color: #eee;
+}
+
+.daterangepicker .ranges li.active {
+  background-color: #08c;
+  color: #fff;
+}
+
+/*  Larger Screen Styling */
+@media (min-width: 564px) {
+  .daterangepicker .ranges ul {
+    width: 140px;
+  }
+  .daterangepicker.single .ranges ul {
+    width: 100%;
+  }
+  .daterangepicker.single .drp-calendar.left {
+    clear: none;
+  }
+  .daterangepicker.single .ranges,
+  .daterangepicker.single .drp-calendar {
+    float: left;
+  }
+  .daterangepicker {
+    direction: ltr;
+    text-align: left;
+  }
+  .daterangepicker .drp-calendar.left {
+    clear: left;
+    margin-right: 0;
+  }
+  .daterangepicker .drp-calendar.right {
+    margin-left: 0;
+  }
+  .daterangepicker .drp-calendar.right .calendar-table {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .daterangepicker .ranges,
+  .daterangepicker .drp-calendar {
+    float: left;
+  }
+}
+@media (min-width: 730px) {
+  .daterangepicker .ranges {
+    width: auto;
+  }
+  .daterangepicker .ranges {
+    float: left;
+  }
+  .daterangepicker.rtl .ranges {
+    float: right;
+  }
+  .daterangepicker .drp-calendar.left {
+    clear: none !important;
+  }
+}
+
+/*# sourceMappingURL=daterangepicker.css.map */

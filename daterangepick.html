@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./moment.min.js"></script>
+    <script type="text/javascript" src="./datarangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="./daterangepicker.css" />
+</head>
+
+<body>
+    <div id="dateTimeRangePicker" class="date-range-picker-container">
+        <div class="input-cintainer">
+            <div class="start-date-time-container calendar-container" class="form-group">
+                <input id="startDateTime" type="text" readonly="readonly" class="calendar" placeholder="选择日期">
+            </div>
+            <span> 至 </span>
+            <div class="end-date-time-container calendar-container" class="form-group">
+                <input id="endDateTime" type="text" readonly class="calendar" placeholder="选择日期">
+            </div>
+        </div>
+        <div class="quick-date-picker-container">
+            <button class="btn btn-link picker-today">今</button>
+            <button class="btn btn-link picker-yesterday">昨</button>
+            <button class="btn btn-link picker-Last-30-days">近30天</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            let options = {
+                //timePicker: true,
+                maxDate: moment().endOf('day'),
+                // locale: {
+                //     format: 'YYYY-MM-DD HH:mm',
+                // }
+            }
+            $('#startDateTime').daterangepicker({
+                ...options
+            }).on('apply.daterangepicker', (ev, picker) => {
+                //如果endDate不为空
+                if ($('#endDateTime').val()) {
+                    let endDateTime = $('#endDateTime').data('daterangepicker').startDate
+                    let startDateTime = picker.startDate;
+                    reSetDate(startDateTime, endDateTime, 'startDate');
+                }
+                $('#startDateTime').val(picker.startDate.format('YYYY-MM-DD HH:mm'))
+
+            })
+
+            $('#endDateTime').daterangepicker({
+                ...options
+            }).on('apply.daterangepicker', (ev, picker) => {
+                //如果startDate不为空
+                if ($('#startDateTime').val()) {
+                    let isStart = $('#startDateTime').data('daterangepicker').startDate
+                    let isEnd = picker.startDate;
+                    reSetDate(isStart, isEnd, 'endDate');
+                }
+                $('#endDateTime').val(picker.startDate.format('YYYY-MM-DD HH:mm'))
+            })
+
+            $('.picker-today').on('click', () => {
+                $('#startDateTime').data('daterangepicker').startDate = moment().startOf('day');
+                $('#endDateTime').data('daterangepicker').startDate = moment().endOf('day');
+                ManuallyFillInput();
+            });
+            $('.picker-yesterday').on('click', () => {
+                $('#startDateTime').data('daterangepicker').startDate = moment().subtract(1, 'day')
+                $('#endDateTime').data('daterangepicker').startDate = moment()
+                ManuallyFillInput();
+            })
+            $('.picker-Last-30-days').on('click', () => {
+                $('#startDateTime').data('daterangepicker').startDate = moment().subtract(1, 'month')
+                $('#endDateTime').data('daterangepicker').startDate = moment()
+                ManuallyFillInput();
+            })
+
+            function reSetDate(startDateTime, endDateTime, flag) {
+                //如果edDateDate比startDate大于一年或者小于一年，startDate在当前endDate的基础上减1年;
+                if ((startDateTime.diff(endDateTime, 'year', true) > 1 ||
+                    endDateTime.diff(startDateTime, 'year', true) > 1)
+                ) {
+                    if (flag == 'endDate') {
+                        $('#startDateTime').data('daterangepicker').startDate = endDateTime.clone().subtract(1, 'year')
+                    } else if (flag == 'startDate') {
+                        $('#endDateTime').data('daterangepicker').startDate = startDateTime.clone().add(1, 'year')
+                    }
+                }
+                // 如果startDate的时间比endDate大，且不超过一年，则交换
+                else if (endDateTime.isBefore(startDateTime)) {
+                    $('#startDateTime').data('daterangepicker').startDate = endDateTime.clone()
+                    $('#endDateTime').data('daterangepicker').startDate = startDateTime.clone()
+                }
+                ManuallyFillInput();
+            }
+
+            function ManuallyFillInput() {
+                if ($('#startDateTime').data('daterangepicker').startDate != null) {
+                    $('#startDateTime').val($('#startDateTime').data('daterangepicker').startDate.format('YYYY-MM-DD HH:mm'));
+                }
+                if ($('#endDateTime').data('daterangepicker').startDate != null) {
+                    $('#endDateTime').val($('#endDateTime').data('daterangepicker').startDate.format('YYYY-MM-DD HH:mm'));
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

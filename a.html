@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script type="text/javascript" src="./datarangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="./daterangepicker.css" />
+    <style>
+        .list {
+
+            height: 250px;
+            /* 定义显示区域的高度 */
+            overflow-y: auto;
+            /* 使得超出部分可以滚动 */
+            border: 1px solid #000;
+            /* 显示边界 */
+        }
+
+        .list-ul {
+            margin: 100px 0;
+        }
+
+        .item {
+            height: 50px;
+            /* 每个列表项的高度 */
+            border-bottom: 1px solid #ddd;
+            /* 列表项之间的分隔线 */
+        }
+
+        .active {
+            background-color: #f0f0f0;
+            /* 激活项的背景色 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="dateTimeRangePicker" class="date-range-picker-container">
+        <div class="input-cintainer">
+            <div class="start-date-time-container calendar-container">
+                <input id="myTimePicker" type="text" readonly="readonly" class="calendar" placeholder="选择日期">
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        $(function () {
+            $('#myTimePicker').daterangepicker({
+                //maxDate: moment().endOf('day'),
+                // minDate: moment('Tue May 04 2023'),
+                // timePicker: false,
+                //startDate: moment().startOf('day'),
+                // locale: {
+                //     format: 'YYYY-MM-DD',
+                // }
+            })
+        });
+    </script>
+</body>
+
+</html>
